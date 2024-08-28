@@ -1,0 +1,75 @@
+import tkinter as tk
+from tkinter import font as tkfont
+import random
+
+def generate_names():
+    number = int(entry.get())
+    if number <= 0:
+        return
+
+    # Creating the output window
+    output_window = tk.Toplevel(root)
+    output_window.title("Generated Names and Galis")
+    output_window.configure(bg='#1c1c1c')  # Dark background
+
+    # Creating a frame with scrollbar
+    frame = tk.Frame(output_window, bg='#1c1c1c')
+    frame.pack(fill=tk.BOTH, expand=True)
+
+    scrollbar = tk.Scrollbar(frame)
+    scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+    text_area = tk.Text(frame, wrap=tk.WORD, yscrollcommand=scrollbar.set, bg='#1c1c1c', fg='#ffd700')  # Golden text
+    text_area.pack(fill=tk.BOTH, expand=True)
+    scrollbar.config(command=text_area.yview)
+
+    name = ["Kumud","Vishal","Meghna","Saran","Dholu","Majnu","Nobita", "John","Baba Ram Dev", "Shaktiman",
+            "Chotha Bheem","Babita Ji","Madhuri","Tarak Meheta","Mahesh", "Deepak", "Raja", "Kavya", "Mr.White",
+            "Stuart Little", "Sanjana", "Pakistan","Champak Chacha","Manohar","Vishal","Mogli","Dumbledore",
+            "Phineas and Ferb","Person Reading this is","Kabir","Gabbar","King Louis the IV","King Louis the III",
+            "Glenn Quagmire","Ram Aur Lakkhan","Karan Arjun"]
+
+    gali = ["Gay","MILF","Dick Head","lodu","Gandu","Rand", "Horny","HIV+ ","BDSM","pedofile","Lodu Chand",
+            "Chirand", "eats shit","Pervert","Little Bitch","Daily Wage Labour","Nigga","Cunt","Macchar ki Jhaant",
+            "Middle Class","the Rapist","Bitch","Gaddhe ki gand","Child Molester","is mentally challanged",
+            "is a pain in the ass","Virgin","Dalal","is full of shit"]
+
+    me = ["God","Legend","is epic","Horny","the best"]
+
+    fonts = list(tkfont.families())
+    
+    for _ in range(number):
+        a = random.choice(name)
+        if a == "Kumud":
+            b = random.choice(me)
+        else:
+            b = random.choice(gali)
+
+        # Random font and color
+        random_font = random.choice(fonts)
+        random_color = "#{:06x}".format(random.randint(0, 0xFFFFFF))
+
+        text_area.insert(tk.END, f"{a} {b}\n", ('name_gali',))
+        text_area.tag_configure('name_gali', font=(random_font, 14), foreground=random_color)
+
+    text_area.config(state=tk.DISABLED)  # Make the text area read-only
+
+# Setting up the main application window
+root = tk.Tk()
+root.title("Name & Gali Generator")
+root.geometry("400x200")
+root.configure(bg='#1c1c1c')
+
+# Labels and Entry for user input
+label = tk.Label(root, text="How Many Names Do You Want?", font=("Helvetica", 14), bg='#1c1c1c', fg='#ffd700')
+label.pack(pady=20)
+
+entry = tk.Entry(root, font=("Helvetica", 14), justify='center')
+entry.pack()
+
+# Generate button
+generate_button = tk.Button(root, text="Generate", font=("Helvetica", 14), bg='#ffd700', fg='#1c1c1c', command=generate_names)
+generate_button.pack(pady=20)
+
+# Start the main application loop
+root.mainloop()
